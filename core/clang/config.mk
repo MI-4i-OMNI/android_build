@@ -1,5 +1,8 @@
 ## Clang configurations.
 
+# ArchiDroid
+include $(BUILD_SYSTEM)/archidroid.mk
+
 # WITHOUT_CLANG covers both HOST and TARGET
 ifeq ($(WITHOUT_CLANG),true)
 WITHOUT_TARGET_CLANG := true
@@ -25,8 +28,12 @@ CLANG_CONFIG_EXTRA_CONLYFLAGS := -std=gnu99
 CLANG_CONFIG_EXTRA_CPPFLAGS :=
 CLANG_CONFIG_EXTRA_LDFLAGS :=
 
+CLANG_CONFIG_EXTRA_CFLAGS += $(ARCHIDROID_CLANG_CFLAGS)
+CLANG_CONFIG_EXTRA_CPPFLAGS += $(ARCHIDROID_CLANG_CPPFLAGS)
+CLANG_CONFIG_EXTRA_LDFLAGS += $(ARCHIDROID_CLANG_LDFLAGS)
+
 CLANG_CONFIG_EXTRA_CFLAGS += \
-  -w -O3 -Qunused-arguments -Wno-unknown-warning-option -D__compiler_offsetof=__builtin_offsetof
+  -D__compiler_offsetof=__builtin_offsetof
 
 # Help catch common 32/64-bit errors.
 CLANG_CONFIG_EXTRA_CFLAGS += \
@@ -58,6 +65,7 @@ CLANG_CONFIG_EXTRA_CFLAGS += \
   -fcolor-diagnostics
 
 CLANG_CONFIG_UNKNOWN_CFLAGS := \
+  $(ARCHIDROID_CLANG_UNKNOWN_FLAGS) \
   -finline-functions \
   -finline-limit=64 \
   -fno-canonical-system-headers \
@@ -83,14 +91,7 @@ CLANG_CONFIG_UNKNOWN_CFLAGS := \
   -Wno-unused-local-typedefs \
   -Wunused-but-set-parameter \
   -Wunused-but-set-variable \
-  -fdiagnostics-color \
-  -fmodulo-sched \
-  -fmodulo-sched-allow-regmoves \
-  -mvectorize-with-neon-quad \
-  -fpredictive-commoning \
-  -ftree-loop-vectorize \
-  -ftree-partial-pre \
-  -fipa-cp-clone
+  -fdiagnostics-color
 
 # Clang flags for all host rules
 CLANG_CONFIG_HOST_EXTRA_ASFLAGS :=
