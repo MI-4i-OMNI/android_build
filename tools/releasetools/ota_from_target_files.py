@@ -136,7 +136,7 @@ OPTIONS.extra_script = None
 OPTIONS.aslr_mode = True
 OPTIONS.worker_threads = multiprocessing.cpu_count() // 2
 if OPTIONS.worker_threads == 0:
-  OPTIONS.worker_threads = 1
+OPTIONS.worker_threads = 1
 OPTIONS.two_step = False
 OPTIONS.no_signing = False
 OPTIONS.block_based = False
@@ -837,7 +837,6 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
       source_zip=source_zip,
       source_version=source_version,
       target_zip=target_zip,
-      input_zip=target_zip,
       target_version=target_version,
       input_version=target_version,
       output_zip=output_zip,
@@ -1244,7 +1243,6 @@ def WriteIncrementalOTAPackage(target_zip, source_zip, output_zip):
       source_zip=source_zip,
       source_version=source_version,
       target_zip=target_zip,
-      input_zip=target_zip,
       target_version=target_version,
       input_version=target_version,
       output_zip=output_zip,
