@@ -136,7 +136,7 @@ OPTIONS.extra_script = None
 OPTIONS.aslr_mode = True
 OPTIONS.worker_threads = multiprocessing.cpu_count() // 2
 if OPTIONS.worker_threads == 0:
-OPTIONS.worker_threads = 1
+  OPTIONS.worker_threads = 1
 OPTIONS.two_step = False
 OPTIONS.no_signing = False
 OPTIONS.block_based = False
